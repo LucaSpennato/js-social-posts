@@ -9,7 +9,7 @@
 //     testo del post,
 //     immagine (non tutti i post devono avere una immagine),
 //     numero di likes.
- 
+
 // Milestone 1 -
 //  Prendendo come riferimento il layout di esempio presente nell'html,
 //  stampiamo i post del nostro feed, rimuovendo i contenuti statici.
@@ -18,8 +18,8 @@
 //  Se clicchiamo sul tasto "Mi Piace" cambiamo il colore sia al bottone che al
 //  testo del bottone del relativo post.
 // Bonus 1-
-//  Quando clicchiamo su un "Mi piace", oltre al cambio previsto dalla milestone 2, i
-// ncrementiamo il counter dei likes relativo al suddetto post.
+//  Quando clicchiamo su un "Mi piace", oltre al cambio previsto dalla milestone 2, 
+// incrementiamo il counter dei likes relativo al suddetto post.
 // Cerchiamo di trovare un modo efficiente per salvare il like per ogni post, 
 // magari sfruttando meglio i dati che ho già a disposizione?
 
@@ -41,7 +41,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=15"
         },
         "likes": 80,
-        "is_liked" : true,
+        "is_liked": true,
         "created": "2022-06-25"
     },
     {
@@ -53,7 +53,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "is_liked" : false,
+        "is_liked": false,
         "created": "2022-06-03"
     },
     {
@@ -65,7 +65,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
-        "is_liked" : true,
+        "is_liked": true,
         "created": "2022-05-15"
     },
     {
@@ -77,7 +77,7 @@ const posts = [
             "image": null
         },
         "likes": 56,
-        "is_liked" : false,
+        "is_liked": false,
         "created": "2022-04-03"
     },
     {
@@ -89,7 +89,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
-         "is_liked" : false,
+        "is_liked": false,
         "created": "2022-03-05"
     },
     {
@@ -101,7 +101,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=33"
         },
         "likes": 95,
-         "is_liked" : true,
+        "is_liked": true,
         "created": "2022-02-02"
     },
     {
@@ -113,7 +113,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=59"
         },
         "likes": 95,
-         "is_liked" : false,
+        "is_liked": false,
         "created": "2022-02-01"
     },
     {
@@ -125,43 +125,111 @@ const posts = [
             "image": "null"
         },
         "likes": 95,
-         "is_liked" : true,
+        "is_liked": true,
         "created": "2021-12-11"
     }
 ];
 
 // stampa dinamica degli elementi dell'array. 
-    // ? creo una funzione per aggiungere tutto dinamicamente e velocemente da immettere con innerHTML
-    // ? creerò solo la parte esterna 'wrapper del post', il resto sarà l'innerHTMl di questo
+// ? creo una funzione per aggiungere tutto dinamicamente e velocemente da immettere con innerHTML
+// ? creerò solo la parte esterna 'wrapper del post', il resto sarà l'innerHTMl di questo
 
-    let mainWrapper =  document.querySelector('.posts-list');
-    console.log(mainWrapper);
+let mainWrapper = document.querySelector('.posts-list');
+console.log(mainWrapper);
+
+let newArray = [];
 
 // scorro in foreach
 posts.forEach((post) => {
 
-    
-    
     // salvo tutto in variabili
-    const { id, content, media, likes, created, is_liked} = post;
+    const { id, content, media, likes, created, is_liked } = post;
     // queste le salvo diversamente per accedere con più facilità
     const authorName = post.author.name;
     const authorImage = post.author.image;
     // console.log(authorName, authorImage);
     // console.log(id, content, media, likes);
 
-    let postWrapper = document.createElement ('div');
+    let postWrapper = document.createElement('div');
     postWrapper.classList.add('post');
     mainWrapper.append(postWrapper);
     postWrapper.innerHTML += innerPost(authorImage, authorName, created, content, media, id, likes, is_liked);
 
+    pushArray (newArray, id, is_liked);
+    
 });
 
-function innerPost(profilePicSrc, authorName, creationDate, caption, postImage, postId ,likesCounter, isLiked){
+let likeBtns = document.querySelectorAll('.like-button');
+console.log(likeBtns);
 
-    if(isLiked === true){
+for (let index = 0; index < likeBtns.length; index++) {
+
+    let likeBtn = likeBtns[index];
+    // console.log(likeBtn)
+
+    likeBtn.addEventListener('click', function(){
+
+        if(likeBtn.classList.contains('like-button--liked')){
+            likeBtn.classList.remove('like-button--liked');
+        }else{
+            likeBtn.classList.add('like-button--liked');
+        }
+
+    });
+
+    
+}
+
+
+// let likeButtons = document.querySelectorAll('.likes__cta');
+// console.log(likeButtons);
+
+// likeButtons.addEventListener('click', function(){
+
+
+
+// });
+
+console.log(newArray)
+
+// newArray.forEach((element, index) => {
+    
+//     console.log(index)
+//     let id = element[0];
+//     let is_liked = element[1];
+
+//     // console.log(is_liked)
+
+//     let likeBtn = document.querySelector('.likes__cta');
+//     let likeBtnInner = document.querySelector('.like-button');
+//     likeBtn.addEventListener('click', () => {
+    
+        
+//             if (is_liked === false) {
+//                 likeBtnInner.classList.add('like-button--liked');
+//                 is_liked = true;
+//             } else {
+//                 likeBtnInner.classList.remove('like-button--liked');
+//                 is_liked = false;
+//             }
+//     });
+
+// });
+
+
+
+
+function pushArray (array,...arguments){
+
+    return array.push({...arguments});
+
+}
+
+function innerPost(profilePicSrc, authorName, creationDate, caption, postImage, postId, likesCounter, isLiked) {
+
+    if (isLiked === true) {
         active = 'like-button--liked';
-    } else{
+    } else {
         active = '';
     }
 
@@ -193,5 +261,7 @@ function innerPost(profilePicSrc, authorName, creationDate, caption, postImage, 
         </div>
     </div>
 </div>`;
+
+
 
 };
