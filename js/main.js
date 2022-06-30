@@ -160,26 +160,39 @@ posts.forEach((post) => {
 });
 
 let likeBtns = document.querySelectorAll('.like-button');
-console.log(likeBtns);
+// console.log(likeBtns);
 
-for (let index = 0; index < likeBtns.length; index++) {
+// for (let index = 0; index < likeBtns.length; index++) {
 
-    let likeBtn = likeBtns[index];
-    // console.log(likeBtn)
+//     let likeBtn = likeBtns[index];
+//     // console.log(likeBtn)
 
-    likeBtn.addEventListener('click', function(){
+//     likeBtn.addEventListener('click', function(){
 
-        if(likeBtn.classList.contains('like-button--liked')){
-            likeBtn.classList.remove('like-button--liked');
+//         if(likeBtn.classList.contains('like-button--liked')){
+//             likeBtn.classList.remove('like-button--liked');
+//         }else{
+//             likeBtn.classList.add('like-button--liked');
+//         }
+
+//     });
+
+    
+// }
+
+likeBtns.forEach(btn => {
+
+    btn.addEventListener('click', function(){
+
+        if(btn.classList.contains('like-button--liked')){
+            btn.classList.remove('like-button--liked');
         }else{
-            likeBtn.classList.add('like-button--liked');
+            btn.classList.add('like-button--liked');
         }
 
     });
 
-    
-}
-
+});
 
 // let likeButtons = document.querySelectorAll('.likes__cta');
 // console.log(likeButtons);
