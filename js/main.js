@@ -150,10 +150,27 @@ posts.forEach((post) => {
 
     let postWrapper = document.createElement ('div');
     postWrapper.classList.add('post');
-
     mainWrapper.append(postWrapper);
-
     postWrapper.innerHTML += innerPost(authorImage, authorName, created, content, media, id, likes);
+    
+});
+//  Se clicchiamo sul tasto "Mi Piace" cambiamo il colore sia al bottone che al
+//  testo del bottone del relativo post.
+let likeBtn = document.querySelector('.likes__cta');
+console.log(likeBtn);
+let isLiked = false;
+likeBtn.addEventListener('click', ()=>{
+
+    let likeBtnInner = document.querySelector('.like-button');
+
+    if(isLiked === false){
+        likeBtnInner.classList.add('like-button--liked');
+        isLiked = true;
+    } else{
+        likeBtnInner.classList.remove('like-button--liked');
+        isLiked = false;
+    }
+    
 
 });
 
