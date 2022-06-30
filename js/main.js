@@ -159,17 +159,30 @@ let likeBtns = document.querySelectorAll('.like-button');
 
 likeBtns.forEach((btn, index) => {
 
+    const post = posts[index];
+    // console.log(posts[index].likes);
+    let likes = posts[index].likes;
+    console.log(likes)
+
+    let innerlike = document.querySelector('.js-likes-counter');
     
     btn.addEventListener('click', function(){
         
-        const post = posts[index];
+        
         if(post.is_liked === true){
             btn.classList.remove('like-button--liked');
+            likes--;
+            console.log(likes)
+            innerlike.innerHTML = likes;
             post.is_liked = !post.is_liked;
         }else{
             btn.classList.add('like-button--liked');
+            likes++;
+            console.log(likes)
+            innerlike.innerHTML = likes;
             post.is_liked = true;
         }
+    
         
     });
     
