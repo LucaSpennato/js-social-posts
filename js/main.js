@@ -137,8 +137,6 @@ const posts = [
 let mainWrapper = document.querySelector('.posts-list');
 console.log(mainWrapper);
 
-let newArray = [];
-
 // scorro in foreach
 posts.forEach((post) => {
 
@@ -155,82 +153,27 @@ posts.forEach((post) => {
     mainWrapper.append(postWrapper);
     postWrapper.innerHTML += innerPost(authorImage, authorName, created, content, media, id, likes, is_liked);
 
-    pushArray (newArray, id, is_liked);
-    
 });
 
 let likeBtns = document.querySelectorAll('.like-button');
-// console.log(likeBtns);
 
-// for (let index = 0; index < likeBtns.length; index++) {
-
-//     let likeBtn = likeBtns[index];
-//     // console.log(likeBtn)
-
-//     likeBtn.addEventListener('click', function(){
-
-//         if(likeBtn.classList.contains('like-button--liked')){
-//             likeBtn.classList.remove('like-button--liked');
-//         }else{
-//             likeBtn.classList.add('like-button--liked');
-//         }
-
-//     });
+likeBtns.forEach((btn, index) => {
 
     
-// }
-
-likeBtns.forEach(btn => {
-
     btn.addEventListener('click', function(){
-
-        if(btn.classList.contains('like-button--liked')){
+        
+        const post = posts[index];
+        if(post.is_liked === true){
             btn.classList.remove('like-button--liked');
+            post.is_liked = !post.is_liked;
         }else{
             btn.classList.add('like-button--liked');
+            post.is_liked = true;
         }
-
-    });
-
-});
-
-// let likeButtons = document.querySelectorAll('.likes__cta');
-// console.log(likeButtons);
-
-// likeButtons.addEventListener('click', function(){
-
-
-
-// });
-
-console.log(newArray)
-
-// newArray.forEach((element, index) => {
-    
-//     console.log(index)
-//     let id = element[0];
-//     let is_liked = element[1];
-
-//     // console.log(is_liked)
-
-//     let likeBtn = document.querySelector('.likes__cta');
-//     let likeBtnInner = document.querySelector('.like-button');
-//     likeBtn.addEventListener('click', () => {
-    
         
-//             if (is_liked === false) {
-//                 likeBtnInner.classList.add('like-button--liked');
-//                 is_liked = true;
-//             } else {
-//                 likeBtnInner.classList.remove('like-button--liked');
-//                 is_liked = false;
-//             }
-//     });
-
-// });
-
-
-
+    });
+    
+});
 
 function pushArray (array,...arguments){
 
