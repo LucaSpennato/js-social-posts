@@ -139,6 +139,8 @@ const posts = [
 
 // scorro in foreach
 posts.forEach((post) => {
+
+    
     
     // salvo tutto in variabili
     const { id, content, media, likes, created, is_liked} = post;
@@ -151,30 +153,17 @@ posts.forEach((post) => {
     let postWrapper = document.createElement ('div');
     postWrapper.classList.add('post');
     mainWrapper.append(postWrapper);
-    postWrapper.innerHTML += innerPost(authorImage, authorName, created, content, media, id, likes);
-    
+    postWrapper.innerHTML += innerPost(authorImage, authorName, created, content, media, id, likes, is_liked);
+
 });
-//  Se clicchiamo sul tasto "Mi Piace" cambiamo il colore sia al bottone che al
-//  testo del bottone del relativo post.
-let likeBtn = document.querySelector('.likes__cta');
-console.log(likeBtn);
-let isLiked = false;
-likeBtn.addEventListener('click', ()=>{
 
-    let likeBtnInner = document.querySelector('.like-button');
+function innerPost(profilePicSrc, authorName, creationDate, caption, postImage, postId ,likesCounter, isLiked){
 
-    if(isLiked === false){
-        likeBtnInner.classList.add('like-button--liked');
-        isLiked = true;
+    if(isLiked === true){
+        active = 'like-button--liked';
     } else{
-        likeBtnInner.classList.remove('like-button--liked');
-        isLiked = false;
+        active = '';
     }
-    
-
-});
-
-function innerPost(profilePicSrc, authorName, creationDate, caption, postImage, postId,likesCounter ){
 
     return innerPostHtml = `<div class="post__header">
     <div class="post-meta">
@@ -194,7 +183,7 @@ function innerPost(profilePicSrc, authorName, creationDate, caption, postImage, 
 <div class="post__footer">
     <div class="likes js-likes">
         <div class="likes__cta">
-            <a class="like-button  js-like-button" href="#" data-postid="${postId}">
+            <a class="like-button  js-like-button ${active}" href="#" data-postid="${postId}">
                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                 <span class="like-button__label">Mi Piace</span>
             </a>
