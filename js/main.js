@@ -156,43 +156,39 @@ posts.forEach((post) => {
 });
 
 let likeBtns = document.querySelectorAll('.like-button');
+console.log(likeCounters)
 
 likeBtns.forEach((btn, index) => {
 
     const post = posts[index];
-    // console.log(posts[index].likes);
-    let likes = posts[index].likes;
-    console.log(likes)
+    const id = posts[index].id;
+    console.log(id);
+    let like = post.likes;
+    
+    let innerlike = document.getElementById(`like-counter-${id}`);
 
-    let innerlike = document.querySelector('.js-likes-counter');
     
     btn.addEventListener('click', function(){
         
         
         if(post.is_liked === true){
             btn.classList.remove('like-button--liked');
-            likes--;
-            console.log(likes)
-            innerlike.innerHTML = likes;
+            like--;
+            console.log(like)
+            innerlike.innerHTML = like;
             post.is_liked = !post.is_liked;
         }else{
             btn.classList.add('like-button--liked');
-            likes++;
-            console.log(likes)
-            innerlike.innerHTML = likes;
+            like++;
+            console.log(like)
+            innerlike.innerHTML = like;
             post.is_liked = true;
         }
-    
         
     });
     
 });
 
-function pushArray (array,...arguments){
-
-    return array.push({...arguments});
-
-}
 
 function innerPost(profilePicSrc, authorName, creationDate, caption, postImage, postId, likesCounter, isLiked) {
 
@@ -226,7 +222,7 @@ function innerPost(profilePicSrc, authorName, creationDate, caption, postImage, 
             </a>
         </div>
         <div class="likes__counter">
-            Piace a <b id="like-counter-1" class="js-likes-counter">${likesCounter}</b> persone
+            Piace a <b id="like-counter-${postId}" class="js-likes-counter">${likesCounter}</b> persone
         </div>
     </div>
 </div>`;
